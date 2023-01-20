@@ -18,7 +18,7 @@ struct SampleSubView: View {
         VStack(spacing: 10) {
             Text(viewModel.star)
             Button("★がランダムに増える") {
-                viewModel.changeStarLengh(Int.random(in: 1 ..< 20))
+                viewModel.changeStarLengh(Int.random(in: 1 ..< 10))
             }
         }
     }

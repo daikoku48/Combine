@@ -18,7 +18,7 @@ struct SampleSubSubSubView: View {
         VStack(spacing: 10) {
             Text(viewModel.delta)
             Button("▲がランダムに増える") {
-                viewModel.changeDeltaLengh(_len: Int.random(in: 1 ..< 30))
+                viewModel.changeDeltaLengh(_len: Int.random(in: 10 ..< 30))
                 
             }
         }

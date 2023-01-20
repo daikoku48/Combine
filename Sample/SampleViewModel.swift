@@ -16,6 +16,7 @@ class SampleViewModel: ObservableObject{
     @Published var delta: String
     
     private var model: SampleModel
+    private var cancellables = Set<AnyCancellable>()
     
     init(model: SampleModel){
         self.model = model
@@ -24,10 +25,26 @@ class SampleViewModel: ObservableObject{
         self.circle = model.circle
         self.delta = model.delta
         
-        self.model.$count.assign(to: &$count)
-        self.model.$star.assign(to: &$star)
-        self.model.$circle.assign(to: &$circle)
-        self.model.$delta.assign(to: &$delta)
+        self.model.$count
+            .sink(receiveValue: { count in
+                self.count = count
+            })
+            .store(in: &cancellables)
+        self.model.$star
+            .sink(receiveValue: {star in
+                self.star = star
+            })
+            .store(in: &cancellables)
+        self.model.$circle
+            .sink(receiveValue: {circle in
+                self.circle = circle
+            })
+            .store(in: &cancellables)
+        self.model.$delta
+            .sink(receiveValue: {delta in
+                self.delta = delta
+            })
+            .store(in: &cancellables)
     }
     
     func changeStarLengh(_ len: Int){
